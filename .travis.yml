@@ -1,0 +1,42 @@
+language: php
+
+php:
+  - 7.2
+
+install: composer install
+
+script:
+  - travis_retry vendor/bin/phpunit
+
+jobs:
+  include:
+    - stage: PHP Lint
+      php: 7.2
+      env: php -l
+      install: travis_retry composer install
+      script:
+        - if find . -type f -name "*.php" ! -path "./vendor/*" | xargs -n 1 -P 8 -I % php -d error_reporting=32767 -l % \; 2>&1 >&- | grep "^" ; then exit 1; fi
+    - stage: Static Code Analysis
+      php: 7.2
+      env: PHPStan
+      install: travis_retry composer install
+      script:
+        - vendor/bin/phpstan analyse --no-interaction --no-progress --memory-limit=900000000  -l 7 src
+    - stage: PHP CS Fixer
+      php: 7.2
+      env: php-cs-fixer
+      install:
+        - phpenv config-rm xdebug.ini
+        - travis_retry composer install
+      script:
+        - vendor/bin/php-cs-fixer fix --dry-run -v --show-progress=dots --diff-format=udiff
+    - stage: PHPCPD
+      php: 7.2
+      env: phpcpd
+      install:
+        - wget https://phar.phpunit.de/phpcpd.phar
+        - chmod +x phpcpd.phar
+        - mv phpcpd.phar /usr/local/bin/phpcpd
+        - travis_retry composer install
+      script:
+        - phpcpd app
