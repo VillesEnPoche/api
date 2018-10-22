@@ -5,6 +5,10 @@ php:
 
 install: composer install
 
+before_script:
+  - cp .env.travis .env
+  - php artisan db:seed
+
 script:
   - travis_retry vendor/bin/phpunit
 
