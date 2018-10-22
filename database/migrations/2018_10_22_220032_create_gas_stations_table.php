@@ -25,12 +25,12 @@ class CreateGasStationsTable extends Migration
 
         Schema::create('gas_prices', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('station_id')->index();
+            $table->unsignedInteger('station_id');
             $table->string('gas');
             $table->float('price');
             $table->timestamps();
-            $table->foreign('station_id')->references('id')->on('gas_stations')->onDelete('cascade');
             $table->unique(['station_id', 'gas']);
+            $table->foreign('station_id')->references('id')->on('gas_stations')->onDelete('cascade');
         });
     }
 
