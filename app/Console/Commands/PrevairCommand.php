@@ -68,6 +68,9 @@ class PrevairCommand extends Command
             ->_extractDatas();
     }
 
+    /**
+     * Extrait les données via ncks et les inserts en BDD.
+     */
     private function _extractDatas()
     {
         if (count($this->_files)) {
