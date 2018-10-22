@@ -3,8 +3,17 @@ language: php
 services:
   - mysql
 
+addons:
+  apt:
+    sources:
+    - mysql-5.7-trusty
+    packages:
+    - mysql-server
+
 php:
   - 7.2
+
+sudo: required
 
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS travis_test;'
