@@ -26,6 +26,11 @@ class Place extends Model
         return $this->hasMany('App\Models\Places\Picture');
     }
 
+    public function events()
+    {
+        return $this->hasMany('App\Models\Event');
+    }
+
     public function type()
     {
         return $this->hasOne('App\Models\Places\Type');
