@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
+require_once __DIR__ . '/api/events.php';
 require_once __DIR__ . '/api/pollutants.php';
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

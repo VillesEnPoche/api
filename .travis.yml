@@ -56,7 +56,6 @@ jobs:
       install:
         - wget https://phar.phpunit.de/phpcpd.phar
         - chmod +x phpcpd.phar
-        - mv phpcpd.phar /usr/local/bin/phpcpd
         - travis_retry composer install
       script:
-        - phpcpd app
+        - ./phpcpd.phar app
