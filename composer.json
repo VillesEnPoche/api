@@ -15,6 +15,7 @@
     "fideloper/proxy": "^4.0",
     "friendsofphp/php-cs-fixer": "^2.13",
     "grimzy/laravel-mysql-spatial": "^2.1",
+    "guzzlehttp/guzzle": "^6.3",
     "laravel/framework": "5.7.*",
     "laravel/tinker": "^1.0"
   },
