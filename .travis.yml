@@ -39,12 +39,6 @@ jobs:
       install: travis_retry composer install
       script:
         - if find . -type f -name "*.php" ! -path "./vendor/*" | xargs -n 1 -P 8 -I % php -d error_reporting=32767 -l % \; 2>&1 >&- | grep "^" ; then exit 1; fi
-    - stage: Static Code Analysis
-      php: 7.2
-      env: PHPStan
-      install: travis_retry composer install
-      script:
-        - vendor/bin/phpstan analyse --no-interaction --no-progress --memory-limit=900000000  -l 7 src
     - stage: PHP CS Fixer
       php: 7.2
       env: php-cs-fixer
