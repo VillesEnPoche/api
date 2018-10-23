@@ -25,8 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('prevair:import')->dailyAt('9:10');
-        $schedule->command('gas:import')->hourly();
+        $schedule->command('import:prevair')->dailyAt('9:10');
+        $schedule->command('import:gas')->hourly();
+        $schedule->command('import:ter')->everyFiveMinutes();
+        $schedule->command('import:silex')->daily();
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Imports;
 
 use App\Models\Pollutant;
 use App\Models\Pollutants\History;
@@ -28,7 +28,7 @@ class PrevairCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'prevair:import {day? : Date souhaitée YYYYMMDD}';
+    protected $signature = 'import:prevair {day? : Date souhaitée YYYYMMDD}';
     /**
      * The console command description.
      *

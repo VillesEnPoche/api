@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Imports;
 
 use App\Models\Gas\Price;
 use App\Models\Gas\Station;
@@ -18,7 +18,7 @@ class GasStationCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'gas:import';
+    protected $signature = 'import:gas';
     /**
      * The console command description.
      *

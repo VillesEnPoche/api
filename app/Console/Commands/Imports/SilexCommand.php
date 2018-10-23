@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Imports;
 
 use App\Models\Event;
 use App\Models\Events\Picture;
@@ -25,7 +25,7 @@ class SilexCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'silex:import';
+    protected $signature = 'import:silex';
 
     /**
      * The console command description.

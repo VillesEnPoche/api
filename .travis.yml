@@ -27,9 +27,10 @@ before_script:
   - cp .env.travis .env
   - php artisan migrate
   - php artisan db:seed
-  - php artisan prevair:import
-  - php artisan gas:import
-  - php artisan silex:import
+  - php artisan import:prevair
+  - php artisan import:gas
+  - php artisan import:silex
+  - php artisan import:ter
 
 script:
   - travis_retry vendor/bin/phpunit
