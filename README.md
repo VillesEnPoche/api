@@ -50,3 +50,7 @@ La page du Silex sera désactivée.
 - Convention de nommage de commit / PR : Angular
 - PHP-CS-Fixer (.php_cs)
 - Les tests Travis doivent passer
+
+## Traductions
+
+Pour traduire l'application dans une nouvelle langue, vous pouvez copier les fichiers de `resources/lang/fr/` dans le dossier de la langue à traduire.
