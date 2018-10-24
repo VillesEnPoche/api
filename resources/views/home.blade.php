@@ -2,10 +2,15 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
+    <title>@yield('title') - {{ env('APP_NAME') }}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title') - Auxer.re en poche</title>
     <link href="{{mix('css/app.css')}}" rel="stylesheet" type="text/css">
+    <meta name="description" content="@yield('meta-description', 'Retrouvez toutes les informations concernant la ville d\'' . env('APP_CITY') . ' en une seule et unique web-application')" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@yield('canonical', env('APP_TWITTER'))" />
+    <meta name="twitter:creator" content="@yield('canonical', env('APP_TWITTER'))" />
+    <link rel="canonical" href="@yield('canonical', env('APP_URL'))" />
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-black mb-4">
