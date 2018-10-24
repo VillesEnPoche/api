@@ -25,7 +25,7 @@ install: composer install
 
 before_script:
   - cp .env.travis .env
-  - npm install & npm run prod
+  - npm install
   - php artisan migrate
   - php artisan db:seed
   - php artisan import:prevair
