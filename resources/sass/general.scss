@@ -19,7 +19,7 @@ body {
   padding: 0;
   .category {
     color: #b0b1b3;
-    background: url(/../images/motif.png) #1b1b1b;
+    background: url(/../images/motif.png) #1c1c1c;
     text-transform: uppercase;
     font-size: 1.3em;
   }
@@ -28,6 +28,9 @@ body {
     font-size: 1.3em;
     &:hover {
       background: url(/../images/motif.png) #1b1b1b;
+    }
+    &.active {
+      background: url(/../images/motif.png) rgb(52, 52, 52);
     }
     img {
       max-width: 100%;

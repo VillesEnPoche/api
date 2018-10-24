@@ -20,7 +20,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 </nav>
-<main role="main" class="container mt-2">
+<main role="main" class="container mt-2 {{ (isset($color)) ? $color : '' }}">
     <div class="row">
         <div class="col-sm col-md-4 col-lg-3 menu">
             @include('layouts.menu');

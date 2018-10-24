@@ -8,7 +8,7 @@
     </div>
 
     @foreach($stations as $station)
-        <table class="table purple table-striped table-hover">
+        <table class="table table-striped table-hover">
             <thead>
             <tr>
                 <th>{{ $station->name }}<br>{{ $station->address }}</th>

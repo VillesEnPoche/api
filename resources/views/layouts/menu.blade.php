@@ -8,7 +8,7 @@
                 @if(!empty($menu['submenu']))
                     @foreach($menu['submenu'] as $key => $title)
                         @if(env('SUBMENU_DISABLE_' . strtoupper($key)) != true)
-                            <a class="nav-link page" href="{{ (Route::has($key) ? route($key) : '#') }}">
+                            <a class="nav-link page {{ (Route::currentRouteName() == $key) ? 'active' : '' }}" href="{{ (Route::has($key) ? route($key) : '#') }}">
                                 <li class="nav-item">
                                     <img src="{{ asset('images/icons/' . $key . '.png') }}">
                                     {{ $title }}

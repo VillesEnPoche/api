@@ -11,6 +11,6 @@ class GazController extends Controller
     {
         $stations = Station::all();
 
-        return view('pages.gazs', ['stations' => $stations]);
+        return view('pages.gazs', ['stations' => $stations, 'color' => 'purple']);
     }
 }
