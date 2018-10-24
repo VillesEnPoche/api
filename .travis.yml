@@ -25,17 +25,10 @@ install: composer install
 
 before_script:
   - cp .env.travis .env
-  - npm install
-  - php artisan migrate
-  - php artisan db:seed
-
-script:
-  - travis_retry vendor/bin/phpunit
 
 jobs:
   include:
     - stage: PHP Lint
-      install: travis_retry composer install
       script:
         - if find . -type f -name "*.php" ! -path "./vendor/*" | xargs -n 1 -P 8 -I % php -d error_reporting=32767 -l % \; 2>&1 >&- | grep "^" ; then exit 1; fi
     - stage: PHP CS Fixer
@@ -49,9 +42,14 @@ jobs:
         - chmod +x phpcpd.phar
         - travis_retry composer install
       script: ./phpcpd.phar app
+    - stage: Tests
+      script: travis_retry vendor/bin/phpunit
     - stage: Commands
       script:
-      - php artisan import:prevair
-      - php artisan import:gas
-      - php artisan import:silex
-      - php artisan import:ter
+        - npm install
+        - php artisan migrate
+        - php artisan db:seed
+        - php artisan import:prevair
+        - php artisan import:gas
+        - php artisan import:silex
+        - php artisan import:ter
