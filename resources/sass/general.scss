@@ -1,0 +1,82 @@
+body {
+  font-family: "Expressway Free";
+  background: url(/../images/background.png) #f0f0f0;
+  min-height: 75rem;
+  padding-top: 4.5rem;
+
+  #logo {
+    max-height: 4.3rem;
+    max-width: 100%;
+  }
+}
+
+.bg-black {
+  background: #020202;
+}
+
+.menu {
+  background: url(/../images/motif.png) #0f0f0f;
+  padding: 0;
+  .category {
+    color: #b0b1b3;
+    background: url(/../images/motif.png) #1b1b1b;
+    text-transform: uppercase;
+    font-size: 1.3em;
+  }
+  a.page {
+    color: #ffffff;
+    font-size: 1.3em;
+    &:hover {
+      background: url(/../images/motif.png) #1b1b1b;
+    }
+    img {
+      max-width: 100%;
+      max-height: 20px;
+      margin-left: 1rem;
+      margin-right: 2px;
+    }
+  }
+}
+
+.navbar {
+  padding: 0.5rem 1rem 0rem;
+}
+
+.navbar-brand {
+  padding-top: 0.58rem;
+  padding-bottom: 0;
+  margin: 0 auto;
+}
+
+.navbar-nav .nav-link {
+  padding: 0.5rem 1rem;
+}
+
+.table {
+  td {
+    padding: 0.5rem;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    line-height: 1em;
+  }
+  th {
+    border-top: 0;
+  }
+  .expired {
+    opacity: 0.5;
+  }
+  .last-update {
+    margin-left: 1em;
+    font-size: 80%;
+  }
+}
+
+.purple {
+  &.table {
+    border: 1px solid $purple;
+    .cheaper {
+      color: $purple;
+      font-weight: bold;
+    }
+  }
+}
