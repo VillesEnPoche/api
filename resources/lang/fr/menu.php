@@ -31,12 +31,23 @@ return [
         'title' => 'Côté pratique',
         'submenu' => [
             'gazs' => 'Carburants',
+            'parking' => 'Parkings',
+            'trashs' => 'Tri et encombrants',
+            'atm' => 'Distributeurs',
         ],
     ],
     'move' => [
         'title' => 'Se déplacer',
+        'submenu' => [
+            'bus' => 'Bus',
+            'trains' => 'Trains',
+            'taxis' => 'Réserver un taxi',
+        ],
     ],
     'emergency' => [
         'title' => 'Urgences',
+        'submenu' => [
+            'police' => 'Polices / Pompiers',
+        ],
     ],
 ];
