@@ -70,6 +70,8 @@ class PrevairCommand extends Command
 
     /**
      * Extrait les données via ncks et les inserts en BDD.
+     *
+     * @return $this
      */
     private function _extractDatas()
     {
@@ -90,6 +92,8 @@ class PrevairCommand extends Command
                 ]);
             }
         }
+
+        return $this;
     }
 
     /**
@@ -125,7 +129,7 @@ class PrevairCommand extends Command
                         'name' => $name,
                         'type' => $type,
                         'var' => $var,
-                        'date' => $date,
+                        'date' => Carbon::createFromFormat('Ymd', $date),
                     ];
                 }
             }
