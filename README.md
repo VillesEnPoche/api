@@ -54,3 +54,7 @@ La page du Silex sera désactivée.
 ## Traductions
 
 Pour traduire l'application dans une nouvelle langue, vous pouvez copier les fichiers de `resources/lang/fr/` dans le dossier de la langue à traduire.
+
+## Graphiques
+
+PhantomJS est pré-requis pour ma génération des graphiques.

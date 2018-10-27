@@ -23,4 +23,16 @@ class Pollutant extends Model
             }
         }
     }
+
+    public function getColor(int $alert)
+    {
+        $colors = [0 => '#00ccaa', '#99e600', '#ffff01', '#ffaa00', '#ff0000', '#7f0000'];
+
+        return $colors[$alert];
+    }
+
+    public function getMax()
+    {
+        return $this->alerts[count($this->alerts) - 1];
+    }
 }
