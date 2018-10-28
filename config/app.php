@@ -174,6 +174,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Grimzy\LaravelMysqlSpatial\SpatialServiceProvider::class,
         App\Providers\FacebookServiceProvider::class,
+        App\Providers\TwitterServiceProvider::class,
 
     ],
 
