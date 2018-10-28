@@ -16,16 +16,14 @@ php:
 sudo: required
 
 before_install:
+  - pecl install imagick
+  - cp .env.travis .env
   - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
   - sudo mysql_upgrade
   - sudo service mysql restart
   - mysql -e 'CREATE DATABASE IF NOT EXISTS travis_test;'
 
 install: composer install
-
-before_script:
-  - pecl install imagick
-  - cp .env.travis .env
 
 jobs:
   include:
