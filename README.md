@@ -58,3 +58,9 @@ Pour traduire l'application dans une nouvelle langue, vous pouvez copier les fic
 ## Graphiques
 
 PhantomJS est pré-requis pour ma génération des graphiques.
+
+## Football
+
+Pour que les imports concernant le football fonctionnent, 2 variables sont à configurer :
+- `FOOTBALL_CHAMPIONSHIP` qui correspond au type de championnant (D1 ou D2)
+- `FOOTBALL_TEAM_NAME` qui correspond au nom de l'équipe
