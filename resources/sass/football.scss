@@ -1,0 +1,27 @@
+.match {
+  border: 1px solid $blue;
+  .date {
+    text-align: center;
+    text-transform: capitalize;
+    padding: 10px 0;
+  }
+  .logo {
+    position: relative;
+    text-align: center;
+    img {
+      max-width: 100px;
+      width: 100%;
+    }
+    .score {
+      position: absolute;
+      top: calc(40% - 20px);
+      right: calc(50% - 10px);
+      font-size: 34px;
+      color: #fff;
+      text-shadow: 0 0 5px #000;
+    }
+  }
+  .name {
+    text-align: center;
+  }
+}

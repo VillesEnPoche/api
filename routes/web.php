@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', 'HomeController@show')->name('home');
 
 Route::get('/carburants.html', 'GazController@show')->name('gazs');
 Route::get('/silex.html', 'SilexController@show')->name('silex');

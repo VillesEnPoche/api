@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\Football\Match;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Storage;
 
@@ -68,6 +69,28 @@ trait Football
                     'verify_peer_name' => false,
                 ],
             ])));
+        }
+    }
+
+    /**
+     * Donne le dernier match joué par l'équipe.
+     *
+     * @return Match|void
+     */
+    private function _lastMatch()
+    {
+        if (! empty(env('FOOTBALL_TEAM_NAME'))) {
+            return Match::where('statut', '!=', 'P')->orderBy('date', 'DESC')->first();
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    private function _nextMatch()
+    {
+        if (! empty(env('FOOTBALL_TEAM_NAME'))) {
+            return Match::where('statut', '=', 'P')->orderBy('date', 'ASC')->first();
         }
     }
 }

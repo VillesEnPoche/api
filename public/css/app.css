@@ -10657,3 +10657,36 @@ body #logo {
   color: #05b8c7;
 }
 
+.match {
+  border: 1px solid #05b8c7;
+}
+
+.match .date {
+  text-align: center;
+  text-transform: capitalize;
+  padding: 10px 0;
+}
+
+.match .logo {
+  position: relative;
+  text-align: center;
+}
+
+.match .logo img {
+  max-width: 100px;
+  width: 100%;
+}
+
+.match .logo .score {
+  position: absolute;
+  top: calc(40% - 20px);
+  right: calc(50% - 10px);
+  font-size: 34px;
+  color: #fff;
+  text-shadow: 0 0 5px #000;
+}
+
+.match .name {
+  text-align: center;
+}
+
