@@ -47,14 +47,18 @@ class Pollutant extends Command
      */
     public function handle()
     {
-        $graphId = $this->_generateImage('horizontal')
+        if ($this->canUseFacebook() === true) {
+            $graphId = $this->_generateImage('horizontal')
             ->_sendPhotoToFacebook(
                 env('FACEBOOK_ALBUM_ID_POLLUTANT'),
                 trans('pollutants.message', ['date' => date('d/m/Y')]),
                 $this->_filename
             );
 
-        $this->output->writeln('Upload fait sur Facebook - ID : ' . $graphId);
+            $this->output->writeln('Upload fait sur Facebook - ID : ' . $graphId);
+        } else {
+            $this->output->error('Facebook est mal configuré');
+        }
     }
 
     /**

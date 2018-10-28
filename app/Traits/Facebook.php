@@ -5,6 +5,25 @@ namespace App\Traits;
 trait Facebook
 {
     /**
+     * Regarde si la configuration Facebook est correcte.
+     *
+     * @return bool
+     */
+    public function canUseFacebook()
+    {
+        /* @var \Facebook\Facebook $facebook */
+        $facebook = resolve('facebook');
+
+        try {
+            $facebook->get('/me');
+
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    /**
      * @param int    $album_id
      * @param string $message
      * @param string $file
