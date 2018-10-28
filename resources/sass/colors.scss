@@ -64,7 +64,7 @@
   .block {
     .name {
       color: $blue;
-      padding-bottom:10px;
+      padding-bottom: 10px;
     }
   }
   .btn-info {
@@ -72,5 +72,45 @@
     &:hover {
       color: $blue;
     }
+  }
+}
+
+.orange {
+  .table, .block {
+    background: #f9f9f9;
+    border: 1px solid $orange;
+    .cheaper {
+      color: $orange;
+      font-weight: bold;
+    }
+  }
+
+  .title {
+    background: $orange;
+    background: -moz-linear-gradient(top, rgba(245, 152, 17, 1) 0%, rgba(227, 123, 22, 1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(245, 152, 17, 1)), color-stop(100%, rgba(227, 123, 22, 1)));
+    background: -webkit-linear-gradient(top, rgba(245, 152, 17, 1) 0%, rgba(227, 123, 22, 1) 100%);
+    background: -o-linear-gradient(top, rgba(245, 152, 17, 1) 0%, rgba(227, 123, 22, 1) 100%);
+    background: -ms-linear-gradient(top, rgba(245, 152, 17, 1) 0%, rgba(227, 123, 22, 1) 100%);
+    background: linear-gradient(to bottom, rgba(245, 152, 17, 1) 0%, rgba(227, 123, 22, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f59811', endColorstr='#e37b16', GradientType=0)
+  }
+
+  .block {
+    .name {
+      color: $orange;
+      padding-bottom: 10px;
+    }
+  }
+  .btn-info {
+    border: 1px solid $orange;
+    &:hover {
+      color: $orange;
+    }
+  }
+}
+.link-black {
+  a {
+    color: $black;
   }
 }

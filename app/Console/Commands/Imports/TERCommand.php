@@ -6,6 +6,7 @@ use App\Models\Ter;
 use App\Models\Ters\Detail;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\ServerException;
 use Illuminate\Console\Command;
 
 class TERCommand extends Command
@@ -104,6 +105,7 @@ class TERCommand extends Command
             }
             $this->output->error('Retry for ' . $train['numero'] . '(' . $retry . ')');
             $this->_getDetails($train, $retry);
+        } catch (ServerException $e) {
         }
 
         return $this;

@@ -17,3 +17,6 @@ Route::get('/carburants.html', 'GazController@show')->name('gazs');
 Route::get('/silex.html', 'SilexController@show')->name('silex');
 
 Route::get('images/pollutants/gauges', 'PollutantController@gauges')->name('pollutants_gauges');
+
+Route::get('trains/{name}-{numero}.html', function ($name, $numero) {
+})->name('details.train');

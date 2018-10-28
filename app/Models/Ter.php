@@ -13,4 +13,20 @@ class Ter extends Model
     protected $casts = [
         'json' => 'array',
     ];
+
+    /**
+     * @return mixed
+     */
+    public static function departures()
+    {
+        return self::where('data', '=', 'departures')->orderBy('day', 'desc')->first();
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function arrivals()
+    {
+        return self::where('data', '=', 'arrivals')->orderBy('day', 'desc')->first();
+    }
 }

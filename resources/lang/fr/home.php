@@ -9,4 +9,12 @@ return [
         'next' => 'Prochain match - ',
         'plus' => 'Plus d\'informations',
     ],
+    'trains' => [
+        'title' => 'À la gare d\'Auxerre',
+        'departures' => 'Prochains trains au départ',
+        'arrivals' => 'Prochains trains à l\'arrivée',
+        'hour' => 'Heure',
+        'origin' => 'Gare d\'origine',
+        'way' => 'Voie',
+    ],
 ];

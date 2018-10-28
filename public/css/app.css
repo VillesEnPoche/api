@@ -11,7 +11,7 @@
   --purple: #b13db8;
   --pink: #f66D9b;
   --red: #e3342f;
-  --orange: #f6993f;
+  --orange: #f59811;
   --yellow: #ffed4a;
   --green: #c3da0e;
   --teal: #4dc0b5;
@@ -10655,6 +10655,42 @@ body #logo {
 
 .blue .btn-info:hover {
   color: #05b8c7;
+}
+
+.orange .table,
+.orange .block {
+  background: #f9f9f9;
+  border: 1px solid #f59811;
+}
+
+.orange .table .cheaper,
+.orange .block .cheaper {
+  color: #f59811;
+  font-weight: bold;
+}
+
+.orange .title {
+  background: #f59811;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f59811), to(#e37b16));
+  background: linear-gradient(to bottom, #f59811 0%, #e37b16 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f59811', endColorstr='#e37b16', GradientType=0);
+}
+
+.orange .block .name {
+  color: #f59811;
+  padding-bottom: 10px;
+}
+
+.orange .btn-info {
+  border: 1px solid #f59811;
+}
+
+.orange .btn-info:hover {
+  color: #f59811;
+}
+
+.link-black a {
+  color: #000;
 }
 
 .match {
