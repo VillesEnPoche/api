@@ -12,9 +12,10 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [
-        //
-    ];
+    protected $commands
+        = [
+            //
+        ];
 
     /**
      * Define the application's command schedule.
@@ -25,13 +26,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('import:prevair')->dailyAt('9:10');
-        $schedule->command('import:gas')->hourly();
-        $schedule->command('import:ter')->everyFiveMinutes();
-        $schedule->command('import:football:season')->daily();
-        $schedule->command('import:football:matchs')->everyFiveMinutes();
-        $schedule->command('import:football:ranking')->hourly();
-        $schedule->command('import:silex')->daily();
+        $schedule->command('import:prevair')->dailyAt('9:10')
+            ->then(function () {
+                $this->call('images:pollutant');
+                $this->call('socials:pollutant');
+            });
+        $schedule->command('import:gas')->runInBackground()->hourly();
+        $schedule->command('import:ter')->runInBackground()->everyFiveMinutes();
+        $schedule->command('import:football:season')->runInBackground()->daily();
+        $schedule->command('import:football:matchs')->runInBackground()->everyFiveMinutes();
+        $schedule->command('import:football:ranking')->runInBackground()->hourly();
+        $schedule->command('import:silex')->runInBackground()->daily();
     }
 
     /**
@@ -41,7 +46,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
