@@ -53,3 +53,6 @@ jobs:
         - php artisan import:gas
         - php artisan import:silex
         - php artisan import:ter
+        - php artisan import:football:seasons
+        - php artisan import:football:matchs
+        - php artisan import:football:rankings
