@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="title">
-        <div class="purple">{{ __('menu.convenience.submenu.gazs') }}</div>
+        <div>{{ __('menu.convenience.submenu.gazs') }}</div>
     </div>
 
     @foreach($stations as $station)
