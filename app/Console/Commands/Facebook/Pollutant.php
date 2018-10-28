@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Facebook;
 
+use App\Traits\Facebook;
 use Illuminate\Console\Command;
 use Imagick;
 use ImagickDraw;
@@ -9,6 +10,7 @@ use ImagickPixel;
 
 class Pollutant extends Command
 {
+    use Facebook;
     /**
      * The name and signature of the console command.
      *
@@ -45,38 +47,14 @@ class Pollutant extends Command
      */
     public function handle()
     {
-        $this->_generateImage('horizontal')->_sendToFacebook();
-    }
+        $graphId = $this->_generateImage('horizontal')
+            ->_sendPhotoToFacebook(
+                env('FACEBOOK_ALBUM_ID_POLLUTANT'),
+                trans('pollutants.message', ['date' => date('d/m/Y')]),
+                $this->_filename
+            );
 
-    /**
-     * @throws \Facebook\Exceptions\FacebookSDKException
-     *
-     * @return $this
-     */
-    private function _sendToFacebook()
-    {
-        /* @var \Facebook\Facebook $facebook */
-        $facebook = resolve('facebook');
-
-        $data = [
-            'message' => trans('pollutants.message', ['date' => date('d/m/Y')]),
-            'source' => $facebook->fileToUpload($this->_filename),
-        ];
-
-        try {
-            // Returns a `Facebook\FacebookResponse` object
-            $response = $facebook->post('/' . env('FACEBOOK_ALBUM_ID_POLLUTANT') . '/photos', $data, env('FACEBOOK_LONG_LIFE_TOKEN'));
-        } catch (\Facebook\Exceptions\FacebookResponseException $e) {
-            $this->error('Graph returned an error: ' . $e->getMessage());
-            exit;
-        } catch (\Facebook\Exceptions\FacebookSDKException $e) {
-            $this->error('Facebook SDK returned an error: ' . $e->getMessage());
-            exit;
-        }
-
-        $this->output->writeln('Upload fait sur Facebook (' . $response->getGraphNode()['id'] . ')');
-
-        return $this;
+        $this->output->writeln('Upload fait sur Facebook - ID : ' . $graphId);
     }
 
     /**
