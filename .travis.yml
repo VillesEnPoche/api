@@ -56,3 +56,4 @@ jobs:
         - php artisan import:football:seasons
         - php artisan import:football:matchs
         - php artisan import:football:rankings
+        - php artisan import:news:yonnerepublicaine
