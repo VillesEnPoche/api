@@ -25,12 +25,15 @@ class TwitterServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('twitter', function ($app) {
-            return new TwitterOAuth(
+            $connection = new TwitterOAuth(
                 config('twitter.config.consumer_key'),
                 config('twitter.config.consumer_secret'),
                 config('twitter.config.access_token'),
                 config('twitter.config.access_token_secret')
             );
+            $connection->setTimeouts(10, 15);
+
+            return $connection;
         });
     }
 }

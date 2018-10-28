@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Console\Commands\Facebook;
+namespace App\Console\Commands\Socials;
 
 use App\Traits\Facebook;
+use App\Traits\Twitter;
 use Illuminate\Console\Command;
 use Imagick;
 use ImagickDraw;
@@ -10,13 +11,13 @@ use ImagickPixel;
 
 class Pollutant extends Command
 {
-    use Facebook;
+    use Facebook, Twitter;
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'facebook:pollutant';
+    protected $signature = 'socials:pollutant';
 
     /**
      * The console command description.
@@ -47,17 +48,26 @@ class Pollutant extends Command
      */
     public function handle()
     {
-        if ($this->canUseFacebook() === true) {
-            $graphId = $this->_generateImage('horizontal')
-            ->_sendPhotoToFacebook(
-                env('FACEBOOK_ALBUM_ID_POLLUTANT'),
-                trans('pollutants.message', ['date' => date('d/m/Y')]),
-                $this->_filename
-            );
+        $this->_generateImage('vertical');
 
-            $this->output->writeln('Upload fait sur Facebook - ID : ' . $graphId);
+        $this->output->writeln('Envoi du fichier ' . $this->_filename);
+        if ($this->canUseFacebook() === true) {
+            //$graphId = $this->_sendPhotoToFacebook(
+            //    env('FACEBOOK_ALBUM_ID_POLLUTANT'),
+            //    trans('pollutants.message', ['date' => date('d/m/Y')]),
+            //    realpath($this->_filename)
+            //);
+
+            //$this->output->writeln('Upload fait sur Facebook - ID : ' . $graphId);
         } else {
             $this->output->error('Facebook est mal configuré');
+        }
+
+        if ($this->canUseTwitter()) {
+            $status = '#' . env('TWITTER_HASHTAG') . ' #qualitedelair 🏭 ' . trans('pollutants.message', ['date' => date('d/m/Y')]);
+            $this->_sendToTwitter($status, $this->_filename);
+        } else {
+            $this->output->error('Twitter est mal configuré');
         }
     }
 
@@ -69,7 +79,7 @@ class Pollutant extends Command
     private function _generateImage($mode = 'horizontal')
     {
         $positions = [
-            'vertical' => [
+            'horizontal' => [
                 'cols' => 2100,
                 'rows' => 780,
                 'start' => [
@@ -97,7 +107,7 @@ class Pollutant extends Command
                     'y' => 760,
                 ],
             ],
-            'horizontal' => [
+            'vertical' => [
                 'cols' => 750,
                 'rows' => 2300,
                 'start' => [

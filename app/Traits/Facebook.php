@@ -39,7 +39,7 @@ trait Facebook
 
         $data = [
             'message' => $message,
-            'source' => $file,
+            'source' => $facebook->fileToUpload($file),
         ];
 
         try {

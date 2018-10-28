@@ -86,7 +86,7 @@ class YonneRepublicaine extends Command
                     if (count($users)) {
                         $status .= ', ' . implode(', ', $users);
                     }
-                    $this->_sendToTwitter($status, $path_image);
+                    $this->_sendToTwitter($status, Storage::disk('public')->path($path_image));
                 }
             }
         }

@@ -3,7 +3,6 @@
 namespace App\Traits;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
-use Illuminate\Support\Facades\Storage;
 
 trait Twitter
 {
@@ -48,7 +47,7 @@ trait Twitter
 
         if (! empty($file)) {
             $media = $twitter->upload('media/upload', [
-                'media' => Storage::disk('public')->path($file),
+                'media' => $file,
                 'media_type' => 'image/jpeg',
             ], true);
             $send['media_ids'] = $media->media_id_string;
