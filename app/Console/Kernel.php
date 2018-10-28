@@ -28,6 +28,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('import:prevair')->dailyAt('9:10');
         $schedule->command('import:gas')->hourly();
         $schedule->command('import:ter')->everyFiveMinutes();
+        $schedule->command('import:football:season')->daily();
+        $schedule->command('import:football:matchs')->everyFiveMinutes();
+        $schedule->command('import:football:ranking')->hourly();
         $schedule->command('import:silex')->daily();
     }
 

@@ -13,6 +13,15 @@ trait Football
      */
     private $_api;
 
+    private function _footballIsEnable()
+    {
+        if (! is_null(env('FOOTBALL_TEAM_NAME')) && ! is_null(env('FOOTBALL_CHAMPIONSHIP'))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * @return $this
      */

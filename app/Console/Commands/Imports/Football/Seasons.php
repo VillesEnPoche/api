@@ -40,6 +40,10 @@ class Seasons extends Command implements Football
      */
     public function handle()
     {
+        if (! $this->_footballIsEnable()) {
+            exit(0);
+        }
+
         $season = $this->_getSeasons();
 
         $this->output->writeln('Saison ' . $season->championship . ' - ' . $season->name);

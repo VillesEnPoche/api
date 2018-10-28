@@ -48,6 +48,10 @@ class Matchs extends Command implements Football
      */
     public function handle()
     {
+        if (! $this->_footballIsEnable()) {
+            exit(0);
+        }
+
         $json = $this->_getJsonForCalendar();
 
         $this->_getSeasonId($json);

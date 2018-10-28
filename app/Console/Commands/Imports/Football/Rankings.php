@@ -47,6 +47,9 @@ class Rankings extends Command implements Football
      */
     public function handle()
     {
+        if (! $this->_footballIsEnable()) {
+            exit(0);
+        }
         $json = $this->_getJsonForRanking();
 
         foreach ($json['flux'] as $ranking) {
