@@ -31,6 +31,11 @@
         {{ $pollutant_history->pollutant()->first()->getMax() }},
         @endforeach
     ];
+    var translate = [
+        @foreach($data as $pollutant_history)
+        "{{ __('pollutants.levels')[$pollutant_history->alert] }}",
+        @endforeach
+    ];
     var dataSet = anychart.data.set(data);
     var palette = anychart.palettes.distinctColors().items([
         @foreach($data as $pollutant_history)
@@ -45,7 +50,7 @@
             gauge.label(i)
                 .fontColor("#000000")
                 .fontSize(16)
-                .text(names[i] + ', <span style="">' + data[i] + ' µg/m³</span>') // color: #7c868e
+                .text(names[i] + ' : <span style="">' + data[i] + ' µg/m³</span><br>(' + translate[i] + ')') // color: #7c868e
                 .useHtml(true);
             gauge.label(i)
                 .hAlign('center')

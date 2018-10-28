@@ -14,5 +14,9 @@ mix.copy('resources/cities/' + process.env.APP_CITY.toLowerCase() + '/', 'public
 mix.copy('resources/images/', 'public/images/', false);
 mix.copy('resources/fonts/', 'public/fonts/', false);
 
+mix.scripts([
+    'resources/js/anychart-base.min.js'
+], 'public/js/all.js');
+
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css').version();

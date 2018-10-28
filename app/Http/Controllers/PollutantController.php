@@ -9,11 +9,11 @@ class PollutantController extends Controller
 {
     public function gauges(Request $request)
     {
-        $date = History::select('date')->where('var', '=', 'MOYJ')
-            ->where('type', '=', 'analyse')->orderBy('date', 'DESC')->first();
+        $date = History::select('date')->where('var', '=', $request->input('var', 'MOYJ'))
+            ->where('type', '=', $request->input('type', 'analyse'))->orderBy('date', 'DESC')->first();
 
-        $data = History::where('var', '=', 'MOYJ')
-            ->where('type', '=', 'analyse')
+        $data = History::where('var', '=', $request->input('var', 'MOYJ'))
+            ->where('type', '=', $request->input('type', 'analyse'))
             ->where('date', '=', $date->date)
             ->orderBy('date', 'DESC')
             ->orderBy('pollutant_id', 'ASC')
