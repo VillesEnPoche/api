@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands\Imports;
 
+use App\Interfaces\Silex;
 use App\Models\Event;
 use App\Models\Events\Picture;
-use App\Models\Place;
 use Carbon\Carbon;
 use DOMDocument;
 use DOMElement;
@@ -12,14 +12,9 @@ use DOMXPath;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
-class SilexCommand extends Command
+class SilexCommand extends Command implements Silex
 {
-    const WEEZEVENT_URL = 'https://www.weezevent.com/widget_multi.php?19012.1.9';
-
-    const XPATH_EVENTS = '//body[@id=\'multiWidgetBody\']/div[@class="event "]';
-
-    const PLACE_NAME = 'Le Silex';
-
+    use \App\Traits\Silex;
     /**
      * The name and signature of the console command.
      *
@@ -58,22 +53,8 @@ class SilexCommand extends Command
      */
     public function handle()
     {
-        $this->_getDom()->_getPlace()->_saveEvents();
-    }
-
-    /**
-     * Récupère le lieu de l'évenement.
-     *
-     * @return $this
-     */
-    private function _getPlace()
-    {
-        $this->_place = Place::where('name', '=', self::PLACE_NAME)->first();
-        if (is_null($this->_place)) {
-            new \Exception(self::PLACE_NAME . ' not found');
-        }
-
-        return $this;
+        $this->_place = $this->_getPlace();
+        $this->_getDom()->_saveEvents();
     }
 
     /**

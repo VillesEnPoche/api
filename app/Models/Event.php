@@ -17,6 +17,11 @@ class Event extends Model
         'position',
     ];
 
+    protected $casts = [
+        'start' => 'datetime',
+        'end' => 'datetime',
+    ];
+
     public function pictures()
     {
         return $this->hasMany('App\Models\Events\Picture');
