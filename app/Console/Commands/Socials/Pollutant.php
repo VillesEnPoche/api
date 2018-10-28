@@ -52,19 +52,19 @@ class Pollutant extends Command
 
         $this->output->writeln('Envoi du fichier ' . $this->_filename);
         if ($this->canUseFacebook() === true) {
-            //$graphId = $this->_sendPhotoToFacebook(
-            //    env('FACEBOOK_ALBUM_ID_POLLUTANT'),
-            //    trans('pollutants.message', ['date' => date('d/m/Y')]),
-            //    realpath($this->_filename)
-            //);
+            $graphId = $this->_sendPhotoToFacebook(
+                env('FACEBOOK_ALBUM_ID_POLLUTANT'),
+                trans('pollutants.message', ['date' => date('d/m/Y')]),
+                realpath($this->_filename)
+            );
 
-            //$this->output->writeln('Upload fait sur Facebook - ID : ' . $graphId);
+            $this->output->writeln('Upload fait sur Facebook - ID : ' . $graphId);
         } else {
             $this->output->error('Facebook est mal configuré');
         }
 
         if ($this->canUseTwitter()) {
-            $status = '#' . env('TWITTER_HASHTAG') . ' #qualitedelair 🏭 ' . trans('pollutants.message', ['date' => date('d/m/Y')]);
+            $status = '#' . env('TWITTER_HASHTAG') . ' #qualitedelair 🏭 ' . trans('pollutants.message', ['date' => date('d/m/Y')]) . ' via @AtmoBFC';
             $this->_sendToTwitter($status, $this->_filename);
         } else {
             $this->output->error('Twitter est mal configuré');
