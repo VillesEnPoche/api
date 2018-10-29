@@ -131,7 +131,7 @@ class SilexCommand extends Command implements Silex
                 $this->output->writeln('Event ' . $e->name . ' created');
 
                 // On télécharge l'image
-                if (Storage::disk('public')->put('silex/' . str_slug($e->name) . '.jpg', file_get_contents($img))) {
+                if (Storage::put('silex/' . str_slug($e->name) . '.jpg', file_get_contents($img))) {
                     Picture::insert([
                        'path' => 'silex/' . str_slug($e->name) . '.jpg',
                        'event_id' => $e->id,

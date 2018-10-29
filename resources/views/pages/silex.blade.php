@@ -20,7 +20,7 @@
                 {{ $event->description }}
             </div>
             <div class="col-sm-3 col-md-2">
-                <img src="{{ Storage::disk('public')->url($event->pictures()->orderBy('order')->first()->path) }}"
+                <img src="{{ Storage::url($event->pictures()->orderBy('order')->first()->path) }}"
                      class="img-fluid"/>
             </div>
             <div class="col-sm-9 col-md-10">

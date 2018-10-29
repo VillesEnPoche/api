@@ -59,8 +59,8 @@ class YonneRepublicaine extends Command
         $authors = $partner->authors()->select(['name', 'twitter'])->get()->toArray();
         foreach ($json['articles'] as $article) {
             $path_image = 'news/yonnerep/' . str_slug($article['titre'] . '-' . $article['uid']) . '.jpg';
-            if (! Storage::disk('public')->exists($path_image)) {
-                Storage::disk('public')->put($path_image, file_get_contents($article['imageURL']));
+            if (! Storage::exists($path_image)) {
+                Storage::put($path_image, file_get_contents($article['imageURL']));
             }
 
             $a = Article::updateOrCreate([
@@ -86,7 +86,7 @@ class YonneRepublicaine extends Command
                     if (count($users)) {
                         $status .= ', ' . implode(', ', $users);
                     }
-                    $this->_sendToTwitter($status, Storage::disk('public')->path($path_image));
+                    $this->_sendToTwitter($status, Storage::path($path_image));
                 }
             }
         }

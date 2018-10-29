@@ -71,8 +71,8 @@ trait Football
      */
     private function _downloadLogo(int $team_id, string $path)
     {
-        if (! Storage::disk('public')->exists('football/logos/' . $team_id . '.png')) {
-            Storage::disk('public')->put('football/logos/' . $team_id . '.png', file_get_contents($path, false, stream_context_create([
+        if (! Storage::exists('football/logos/' . $team_id . '.png')) {
+            Storage::put('football/logos/' . $team_id . '.png', file_get_contents($path, false, stream_context_create([
                 'ssl' => [
                     'verify_peer' => false,
                     'verify_peer_name' => false,
