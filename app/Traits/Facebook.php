@@ -11,10 +11,9 @@ trait Facebook
      */
     public function canUseFacebook()
     {
-        /* @var \Facebook\Facebook $facebook */
-        $facebook = resolve('facebook');
-
         try {
+            /* @var \Facebook\Facebook $facebook */
+            $facebook = resolve('facebook');
             $facebook->get('/me');
 
             return true;

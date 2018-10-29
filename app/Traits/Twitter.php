@@ -13,10 +13,9 @@ trait Twitter
      */
     public function canUseTwitter()
     {
-        /* @var TwitterOAuth $twitter */
-        $twitter = resolve('twitter');
-
         try {
+            /* @var TwitterOAuth $twitter */
+            $twitter = resolve('twitter');
             $twitter->get('/me');
 
             return true;
