@@ -13,14 +13,13 @@ trait Twitter
      */
     public function canUseTwitter()
     {
-        try {
-            /* @var TwitterOAuth $twitter */
-            $twitter = resolve('twitter');
-            $twitter->get('/me');
-
-            return true;
-        } catch (\Exception $e) {
+        /* @var TwitterOAuth $twitter */
+        $twitter = resolve('twitter');
+        $response = $twitter->get('account/verify_credentials');
+        if (! empty($response->errors)) {
             return false;
+        } else {
+            return true;
         }
     }
 
