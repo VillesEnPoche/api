@@ -1,4 +1,4 @@
-@if(!empty($trains))
+@if(!empty($trains['arrivals']) && !empty($trains['departures']))
     <div class="col-12">
         <div class="row orange justify-content-between">
             <div class="col-12">
