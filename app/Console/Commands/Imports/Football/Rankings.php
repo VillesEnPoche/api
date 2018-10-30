@@ -5,11 +5,12 @@ namespace App\Console\Commands\Imports\Football;
 use App\Interfaces\Football;
 use App\Models\Football\Ranking;
 use App\Models\Football\Season;
+use App\Traits\RocketChat;
 use Illuminate\Console\Command;
 
 class Rankings extends Command implements Football
 {
-    use \App\Traits\Football;
+    use \App\Traits\Football, RocketChat;
 
     /**
      * The name and signature of the console command.
@@ -71,5 +72,6 @@ class Rankings extends Command implements Football
                 'day' => $ranking['rank_day'],
             ]);
         }
+        $this->sendToRocketChat(['text' => 'Import du classement de football fini']);
     }
 }

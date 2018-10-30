@@ -5,6 +5,7 @@ namespace App\Console\Commands\Imports\News;
 use App\Models\Article;
 use App\Models\Articles\Partner;
 use App\Traits\Facebook;
+use App\Traits\RocketChat;
 use App\Traits\Twitter;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class YonneRepublicaine extends Command
 {
-    use Facebook, Twitter;
+    use Facebook , Twitter , RocketChat;
 
     const YONNE_REP_JSON = 'https://www.lyonne.fr/mobileapp/articles?limit=5&offset=0&code_insee=';
     /**
@@ -20,7 +21,7 @@ class YonneRepublicaine extends Command
      *
      * @var string
      */
-    protected $signature = 'import:news:yonnerepublicaine';
+    protected $signature = 'import:news:yonnerepublicaine {--disable-facebook} {--disable-twitter} {--disable-rocketchat}';
 
     /**
      * The console command description.
@@ -55,7 +56,7 @@ class YonneRepublicaine extends Command
     private function _getArticles()
     {
         $json = \GuzzleHttp\json_decode(file_get_contents(self::YONNE_REP_JSON . env('CITY_INSEE', 89024)), true);
-        $partner = Partner::where('command', '=', $this->signature)->select(['id', 'twitter'])->first();
+        $partner = Partner::where('command', '=', 'import:news:yonnerepublicaine')->select(['id', 'twitter'])->first();
         $authors = $partner->authors()->select(['name', 'twitter'])->get()->toArray();
         foreach ($json['articles'] as $article) {
             $path_image = 'news/yonnerep/' . str_slug($article['titre'] . '-' . $article['uid']) . '.jpg';
@@ -76,17 +77,32 @@ class YonneRepublicaine extends Command
 
             // L'article vient d'être créé, on le pousse sur les réseaux sociaux
             if ($a->wasRecentlyCreated) {
-                if ($this->canUseFacebook()) {
+                if ($this->canUseFacebook() && ! $this->option('disable-facebook')) {
                     $this->_sendLinkToFacebook($article->href);
                 }
 
-                if ($this->canUseTwitter()) {
-                    $status = '#' . env('TWITTER_HASHTAG') . ' ' . substr($a->title, 0, 90).'... ' . $a->href . ' via @' . $partner->twitter;
+                if ($this->canUseTwitter() && ! $this->option('disable-twitter')) {
+                    $status = '#' . env('TWITTER_HASHTAG') . ' ' . substr($a->title, 0, 90) . '... ' . $a->href . ' via @' . $partner->twitter;
                     $users = $this->_searchAuthors($authors, $article['contenu']);
                     if (count($users)) {
                         $status .= ', ' . implode(', ', $users);
                     }
                     $this->_sendToTwitter($status, Storage::path($path_image));
+                }
+                if (! $this->option('disable-rocketchat')) {
+                    $this->sendToRocketChat([
+                        'text' => 'Nouvel Article',
+                        'attachments' => [
+                            [
+                                'color' => '#c3da0e',
+                                'author_name' => 'Yonne Républicaine',
+                                'title' => $a->title,
+                                'image_url' => Storage::url($a->image),
+                                'title_link' => $a->href,
+                                'text' => $a->content,
+                            ],
+                        ],
+                    ]);
                 }
             }
         }

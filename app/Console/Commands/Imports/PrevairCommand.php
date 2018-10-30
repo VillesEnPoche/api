@@ -4,6 +4,7 @@ namespace App\Console\Commands\Imports;
 
 use App\Models\Pollutant;
 use App\Models\Pollutants\History;
+use App\Traits\RocketChat;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
@@ -11,6 +12,7 @@ use Symfony\Component\Process\Process;
 
 class PrevairCommand extends Command
 {
+    use RocketChat;
     /**
      * URL des fichiers prevair.
      */
@@ -134,6 +136,10 @@ class PrevairCommand extends Command
                 }
             }
         }
+
+        $this->sendToRocketChat([
+            'text' => 'Téléchargement des fichiers prevair fini.',
+        ]);
 
         return $this;
     }

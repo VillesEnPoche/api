@@ -3,6 +3,7 @@
 namespace App\Console\Commands\Socials;
 
 use App\Traits\Facebook;
+use App\Traits\RocketChat;
 use App\Traits\Twitter;
 use Illuminate\Console\Command;
 use Imagick;
@@ -11,13 +12,13 @@ use ImagickPixel;
 
 class Pollutant extends Command
 {
-    use Facebook, Twitter;
+    use Facebook, Twitter, RocketChat;
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'socials:pollutant';
+    protected $signature = 'socials:pollutant {--disable-facebook} {--disable-twitter} {--disable-rocketchat}';
 
     /**
      * The console command description.
@@ -51,7 +52,7 @@ class Pollutant extends Command
         $this->_generateImage('vertical');
 
         $this->output->writeln('Envoi du fichier ' . $this->_filename);
-        if ($this->canUseFacebook() === true) {
+        if ($this->canUseFacebook() === true && ! $this->option('disable-facebook')) {
             $graphId = $this->_sendPhotoToFacebook(
                 env('FACEBOOK_ALBUM_ID_POLLUTANT'),
                 trans('pollutants.message', ['date' => date('d/m/Y')]),
@@ -63,11 +64,14 @@ class Pollutant extends Command
             $this->output->error('Facebook est mal configuré');
         }
 
-        if ($this->canUseTwitter()) {
+        if ($this->canUseTwitter() && ! $this->option('disable-twitter')) {
             $status = '#' . env('TWITTER_HASHTAG') . ' #qualitedelair 🏭 ' . trans('pollutants.message', ['date' => date('d/m/Y')]) . ' via @AtmoBFC';
             $this->_sendToTwitter($status, $this->_filename);
         } else {
             $this->output->error('Twitter est mal configuré');
+        }
+        if (! $this->option('disable-rocketchat')) {
+            $this->sendToRocketChat(['text' => 'Génération de l\'image du jour sur la pollution fait.']);
         }
     }
 

@@ -5,12 +5,13 @@ namespace App\Console\Commands\Imports\Football;
 use App\Interfaces\Football;
 use App\Models\Football\Match;
 use App\Models\Football\Season;
+use App\Traits\RocketChat;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class Matchs extends Command implements Football
 {
-    use \App\Traits\Football;
+    use \App\Traits\Football, RocketChat;
 
     /**
      * The name and signature of the console command.
@@ -82,6 +83,8 @@ class Matchs extends Command implements Football
                 }
             }
         }
+
+        $this->sendToRocketChat(['text' => 'Import des matchs de football fini']);
     }
 
     /**

@@ -2,10 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Traits\RocketChat;
 use Illuminate\Console\Command;
 
 class Optimize extends Command
 {
+    use RocketChat;
     /**
      * The name and signature of the console command.
      *
@@ -27,6 +29,7 @@ class Optimize extends Command
      */
     public function handle()
     {
+        $this->sendToRocketChat(['text' => 'Déploiement en cours.']);
         $this->call('route:cache');
 
         $this->info('Files cached successfully!');

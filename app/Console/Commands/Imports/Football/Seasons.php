@@ -4,11 +4,12 @@ namespace App\Console\Commands\Imports\Football;
 
 use App\Interfaces\Football;
 use App\Models\Football\Season;
+use App\Traits\RocketChat;
 use Illuminate\Console\Command;
 
 class Seasons extends Command implements Football
 {
-    use \App\Traits\Football;
+    use \App\Traits\Football, RocketChat;
     /**
      * The name and signature of the console command.
      *
@@ -47,6 +48,8 @@ class Seasons extends Command implements Football
         $season = $this->_getSeasons();
 
         $this->output->writeln('Saison ' . $season->championship . ' - ' . $season->name);
+
+        $this->sendToRocketChat(['text' => 'Import des saisons de football fini']);
     }
 
     /**

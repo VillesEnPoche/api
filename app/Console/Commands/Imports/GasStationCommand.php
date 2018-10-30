@@ -4,12 +4,14 @@ namespace App\Console\Commands\Imports;
 
 use App\Models\Gas\Price;
 use App\Models\Gas\Station;
+use App\Traits\RocketChat;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use ZipArchive;
 
 class GasStationCommand extends Command
 {
+    use RocketChat;
     const API_URL = 'https://donnees.roulez-eco.fr/opendata/instantane';
     const DIR_FILES = 'gas';
     const FILE_NAME = 'PrixCarburants_instantane.xml';
@@ -46,6 +48,9 @@ class GasStationCommand extends Command
     {
         if ($this->_downloadFile()->_unzipFile()) {
             $this->_searchStations();
+            $this->sendToRocketChat(['text' => 'Import des carburants fini.']);
+        } else {
+            $this->sendToRocketChat(['text' => 'Erreur dans l\'import des carburants.']);
         }
     }
 
