@@ -81,6 +81,10 @@ class PrevairCommand extends Command
             foreach ($this->_files as $infos) {
                 $process = new Process('ncks -s "%f" -C -H -d lat,' . env('LATITUDE') . ' -d lon,' . env('LONGITUDE') . ' -v ' . $infos['pollutant']->cdf_name . ' ' . storage_path('app/' . self::DIR_FILES . '/' . $infos['name']));
                 $process->run();
+                $this->output->writeln($process->getCommandLine());
+                if (! empty($process->getErrorOutput())) {
+                    $this->output->error($process->getErrorOutput());
+                }
                 $this->output->writeln($infos['pollutant']->name . ' - ' . $infos['var'] . ' : ' . trim($process->getOutput()));
 
                 History::updateOrCreate([
