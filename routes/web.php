@@ -18,5 +18,4 @@ Route::get('/silex.html', 'SilexController@show')->name('silex');
 
 Route::get('images/pollutants/gauges', 'PollutantController@gauges')->name('pollutants_gauges');
 
-Route::get('trains/{name}-{numero}.html', function ($name, $numero) {
-})->name('details.train');
+Route::get('trains/{name}-{numero}.html', 'HomeController@show')->name('details.train');
