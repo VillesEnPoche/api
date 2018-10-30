@@ -173,6 +173,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Grimzy\LaravelMysqlSpatial\SpatialServiceProvider::class,
+        App\Providers\RocketChatServiceProvider::class,
         App\Providers\FacebookServiceProvider::class,
         App\Providers\TwitterServiceProvider::class,
 

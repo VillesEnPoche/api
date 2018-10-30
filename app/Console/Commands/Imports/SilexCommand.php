@@ -5,6 +5,7 @@ namespace App\Console\Commands\Imports;
 use App\Interfaces\Silex;
 use App\Models\Event;
 use App\Models\Events\Picture;
+use App\Traits\RocketChat;
 use Carbon\Carbon;
 use DOMDocument;
 use DOMElement;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SilexCommand extends Command implements Silex
 {
-    use \App\Traits\Silex;
+    use \App\Traits\Silex, RocketChat;
     /**
      * The name and signature of the console command.
      *
@@ -137,6 +138,20 @@ class SilexCommand extends Command implements Silex
                        'event_id' => $e->id,
                     ]);
                 }
+
+                $this->sendToRocketChat([
+                    'text' => 'Ajout d\'un nouvel événement',
+                    'attachments' => [
+                        [
+                            'color' => '#05b8c7',
+                            'author_name' => 'Le Silex',
+                            'title' => $e->name,
+                            'image_url' => Storage::url('silex/' . str_slug($e->name) . '.jpg'),
+                            'title_link' => $e->link,
+                            'text' => trans('silex.event.start') . ' ' . $e->start->isoFormat('dddd D MMMM Y') . ' ' . trans('silex.event.at') . ' ' . $e->start->format('H:i'),
+                        ],
+                    ],
+                ]);
             }
         }
 
