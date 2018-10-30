@@ -1,42 +1,58 @@
 language: php
 
+services:
+  - mysql
+
+addons:
+  apt:
+    sources:
+    - mysql-5.7-trusty
+    packages:
+    - mysql-server
+
 php:
   - 7.2
 
-install: composer install
+sudo: required
 
-script:
-  - travis_retry vendor/bin/phpunit
+before_install:
+  - printf "\n" | pecl install imagick
+  - cp .env.travis .env
+  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  - sudo mysql_upgrade
+  - sudo service mysql restart
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS travis_test;'
+
+install: composer install
 
 jobs:
   include:
     - stage: PHP Lint
-      php: 7.2
-      env: php -l
-      install: travis_retry composer install
       script:
         - if find . -type f -name "*.php" ! -path "./vendor/*" | xargs -n 1 -P 8 -I % php -d error_reporting=32767 -l % \; 2>&1 >&- | grep "^" ; then exit 1; fi
-    - stage: Static Code Analysis
-      php: 7.2
-      env: PHPStan
-      install: travis_retry composer install
-      script:
-        - vendor/bin/phpstan analyse --no-interaction --no-progress --memory-limit=900000000  -l 7 src
     - stage: PHP CS Fixer
-      php: 7.2
-      env: php-cs-fixer
       install:
         - phpenv config-rm xdebug.ini
         - travis_retry composer install
-      script:
-        - vendor/bin/php-cs-fixer fix --dry-run -v --show-progress=dots --diff-format=udiff
+      script: vendor/bin/php-cs-fixer fix --dry-run -v --show-progress=dots --diff-format=udiff
     - stage: PHPCPD
-      php: 7.2
-      env: phpcpd
       install:
         - wget https://phar.phpunit.de/phpcpd.phar
         - chmod +x phpcpd.phar
-        - mv phpcpd.phar /usr/local/bin/phpcpd
         - travis_retry composer install
+      script: ./phpcpd.phar app
+    - stage: Tests
+      script: travis_retry vendor/bin/phpunit
+    - stage: Commands
       script:
-        - phpcpd app
+        - npm install
+        - php artisan migrate
+        - php artisan db:seed
+        - php artisan import:prevair
+        - php artisan import:gas
+        - php artisan import:silex
+        - php artisan import:ter
+        - php artisan import:football:seasons
+        - php artisan import:football:matchs
+        - php artisan import:football:rankings
+        - php artisan import:news:yonnerepublicaine
