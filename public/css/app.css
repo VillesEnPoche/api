@@ -10637,7 +10637,8 @@ body #logo {
   font-weight: bold;
 }
 
-.blue .title {
+.blue .title,
+.blue .head {
   background: #05b8c7;
   background: -webkit-gradient(linear, left top, left bottom, from(#05b8c7), to(#109da7));
   background: linear-gradient(to bottom, #05b8c7 0%, #109da7 100%);
@@ -10724,5 +10725,12 @@ body #logo {
 
 .match .name {
   text-align: center;
+  padding-bottom: 10px;
+}
+
+.match .head {
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
 }
 
