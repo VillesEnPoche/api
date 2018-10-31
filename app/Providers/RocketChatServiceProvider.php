@@ -25,10 +25,10 @@ class RocketChatServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('rocket', function ($app) {
-            if (! empty(getenv('ROCKET_CHAT_WEBHOOK'))) {
+            if (! empty(env('ROCKET_CHAT_WEBHOOK'))) {
                 $webhook = new Client([
-                    'base_uri' => getenv('ROCKET_CHAT_WEBHOOK'),
-                    'timeout' => 10.0,
+                    'base_uri' => env('ROCKET_CHAT_WEBHOOK'),
+                    'timeout' => env('ROCKET_CHAT_WEBHOOK_TIMEOUT', 10),
                 ]);
 
                 return $webhook;

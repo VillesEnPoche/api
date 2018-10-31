@@ -9,6 +9,11 @@ return [
         'next' => 'Prochain match',
         'plus' => 'Plus d\'informations',
     ],
+    'rugby' => [
+        'last' => 'Dernier match',
+        'next' => 'Prochain match',
+        'plus' => 'Plus d\'informations',
+    ],
     'trains' => [
         'title' => 'À la gare d\'Auxerre',
         'departures' => 'Prochains trains au départ',
