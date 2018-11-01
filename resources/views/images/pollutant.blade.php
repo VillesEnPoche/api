@@ -2,10 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-circular-gauge.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" />
-    <link rel="stylesheet" href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" />
+    <script src="{{ asset('js/anychart.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/anychart.css') }}" />
     <style>
         html, body, #container {
             width: 100%;
