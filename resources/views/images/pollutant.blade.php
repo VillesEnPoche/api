@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script src="{{ asset('js/anychart.js') }}"></script>
+    <script src="https://cdn.anychart.com/releases/staging/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/staging/js/anychart-circular-gauge.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/anychart.css') }}" />
     <style>
         html, body, #container {
