@@ -17,7 +17,7 @@ class CreateRugbyTable extends Migration
             $table->increments('id');
             $table->string('championship');
             $table->string('name');
-            $table->unsignedMediumInteger('phase_id')->index();
+            $table->unsignedMediumInteger('phase_id')->unique();
             $table->timestamps();
         });
 
@@ -60,8 +60,8 @@ class CreateRugbyTable extends Migration
             $table->unsignedSmallInteger('bonusDefensif');
             $table->timestamps();
 
-            $table->foreign('phase_id')->references('phase_id')->on('rugby_phases')->onDelete('cascade');
             $table->unique(['phase_id', 'team_id']);
+            $table->foreign('phase_id')->references('phase_id')->on('rugby_phases')->onDelete('cascade');
         });
     }
 
