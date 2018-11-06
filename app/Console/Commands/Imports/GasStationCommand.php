@@ -90,8 +90,8 @@ class GasStationCommand extends Command
     {
         $zip = new ZipArchive();
         $this->output->writeln('Dezip ' . storage_path('app/' . self::DIR_FILES . '/' . $this->_name));
-        if ($zip->open(storage_path('app/' . self::DIR_FILES . '/' . $this->_name)) === true) {
-            $zip->extractTo(storage_path('app/' . self::DIR_FILES . '/'));
+        if ($zip->open(Storage::path(self::DIR_FILES . '/' . $this->_name)) === true) {
+            $zip->extractTo(Storage::path(self::DIR_FILES));
             $zip->close();
 
             return true;
