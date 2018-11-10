@@ -78,7 +78,7 @@ class YonneRepublicaine extends Command
             // L'article vient d'être créé, on le pousse sur les réseaux sociaux
             if ($a->wasRecentlyCreated) {
                 if ($this->canUseFacebook() && ! $this->option('disable-facebook')) {
-                    $this->_sendLinkToFacebook($article->href);
+                    $this->_sendLinkToFacebook($a->href);
                 }
 
                 if ($this->canUseTwitter() && ! $this->option('disable-twitter')) {
