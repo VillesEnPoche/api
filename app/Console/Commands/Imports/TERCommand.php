@@ -24,7 +24,7 @@ class TERCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Import des TER';
 
     /**
      * @var Client
