@@ -67,8 +67,7 @@
     "post-install-cmd": [
       "@php artisan migrate --force",
       "@php artisan queue:restart",
-      "@php artisan storage:link",
-      "npm install"
+      "@php artisan storage:link"
     ]
   },
   "config": {
