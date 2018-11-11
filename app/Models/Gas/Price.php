@@ -27,8 +27,11 @@ class Price extends Model
             ->orderBy('price', 'asc')
             ->whereDate('created_at', '>', Carbon::now()->subDays(self::EXPIRED_DAY))
             ->first();
-
-        return $price->price === $this->price;
+        if (! is_null($price)) {
+            return $price->price === $this->price;
+        } else {
+            return false;
+        }
     }
 
     public function isExpired()
