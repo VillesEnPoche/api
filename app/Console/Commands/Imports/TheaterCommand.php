@@ -12,6 +12,8 @@ use Imagick;
 
 class TheaterCommand extends Command
 {
+    const WAIT_TIME = 60;
+
     const ALLOCINE_API_URL = 'https://api.allocine.fr/rest/v3/';
     /**
      * The name and signature of the console command.
@@ -90,7 +92,6 @@ class TheaterCommand extends Command
             $this->_parseMovies($feed);
 
             $day->addDay();
-            sleep(10); // On attends pour éviter les 403
         }
     }
 
@@ -104,6 +105,7 @@ class TheaterCommand extends Command
      */
     private function _createRequest($method, $params)
     {
+        sleep(self::WAIT_TIME);
         // new algo to build the query
         $sed = date('Ymd');
         $sig = urlencode(base64_encode(sha1(env('ALLOCINE_SECRET_KEY') . http_build_query($params) . '&sed=' . $sed, true)));
