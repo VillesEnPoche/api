@@ -20,8 +20,10 @@
                 {{ $event->description }}
             </div>
             <div class="col-sm-3 col-md-2">
-                <img src="{{ Storage::url($event->pictures()->orderBy('order')->first()->path) }}"
-                     class="img-fluid"/>
+                @if(!empty($event->pictures()->orderBy('order')->first()))
+                    <img src="{{ Storage::url($event->pictures()->orderBy('order')->first()->path) }}"
+                         class="img-fluid"/>
+                @endif
             </div>
             <div class="col-sm-9 col-md-10">
                 {{ $event->start->locale(app()->getLocale())->diffForHumans() }} {{ __('silex.event.start') }}
