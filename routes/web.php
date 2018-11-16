@@ -15,6 +15,7 @@ Route::get('/', 'HomeController@show')->name('home');
 
 Route::get('/carburants.html', 'GazController@show')->name('gazs');
 Route::get('/silex.html', 'SilexController@show')->name('silex');
+Route::get('/cinema.html', 'CinemaController@show')->name('cinema');
 
 Route::get('images/pollutants/gauges', 'PollutantController@gauges')->name('pollutants_gauges');
 

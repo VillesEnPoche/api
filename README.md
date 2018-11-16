@@ -44,6 +44,18 @@ SUBMENU_DISABLE_SILEX=true
 
 La page du Silex sera désactivée.
 
+### Rugby
+
+Récupérez les informations (url de l'api en fonction de la compétition) et l'ID de l'équipe
+
+```dotenv
+RUGBY_FFR_API="https://competitions.ffr.fr/api/v1/competition/3eme-division-federale"
+RUGBY_FFR_ID=1152
+```
+
+### Cinéma
+
+Récupéré l'ID du cinéma sur Allociné
 
 ## Contributions
 

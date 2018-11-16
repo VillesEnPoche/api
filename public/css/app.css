@@ -10734,3 +10734,37 @@ body #logo {
   text-transform: uppercase;
 }
 
+.movie .title_movie {
+  font-size: 24px;
+  color: #05b8c7;
+}
+
+.movie .next {
+  font-size: 18px;
+}
+
+.movie .next span {
+  font-size: 15px;
+}
+
+.movie .synopsis {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.movie .genres,
+.movie .directors,
+.movie .actors,
+.movie .release,
+.movie .synopsis {
+  font-weight: bold;
+}
+
+.movie .genres span,
+.movie .directors span,
+.movie .actors span,
+.movie .release span,
+.movie .synopsis span {
+  font-weight: normal;
+}
+

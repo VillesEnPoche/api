@@ -1,0 +1,22 @@
+.movie {
+  .title_movie {
+    font-size: 24px;
+    color: $blue;
+  }
+  .next {
+    font-size: 18px;
+    span {
+      font-size: 15px;
+    }
+  }
+  .synopsis {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .genres, .directors, .actors, .release, .synopsis {
+    font-weight: bold;
+    span {
+      font-weight: normal;
+    }
+  }
+}
