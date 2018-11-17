@@ -91,9 +91,9 @@
                 <div class="date">{{ Carbon\Carbon::createFromFormat('Y-m-d', $date)->isoFormat('dddd Do MMMM YYYY') }}</div>
                 @foreach($times as $time)
                     <div class="time row">
-                        <span class="hour col-md-5">{{ $time->date->format('H:i') }}</span>
-                        <span class="lang col-md-5">{{ $time->lang }}</span>
-                        <span class="is_3d col-md-2">@if($time->is_3d)
+                        <span class="hour col-5">{{ $time->date->format('H:i') }}</span>
+                        <span class="lang col-5">{{ $time->lang }}</span>
+                        <span class="is_3d col-2">@if($time->is_3d)
                                 3D
                             @endif</span>
                     </div>
