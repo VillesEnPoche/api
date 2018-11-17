@@ -183,7 +183,7 @@ class TheaterCommand extends Command
                 try {
                     $this->output->writeln('Resize ' . $name . ' pour ' . $path);
                     $thumb = new Imagick();
-                    $thumb->readImage(Storage::path($path));
+                    $thumb->readImage(Storage::url($path));
                     $thumb->resizeImage($size, 0, Imagick::FILTER_LANCZOS, 1);
                     Storage::put(str_replace('theater', 'theater/' . $name, $path), $thumb->getImageBlob());
                     $thumb->clear();
