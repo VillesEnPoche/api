@@ -122,9 +122,9 @@ class TheaterCommand extends Command
             foreach ($feed['feed']['theaterShowtimes'][0]['movieShowtimes'] as $data) {
                 // On télécharge l'affiche si elle n'existe pas
                 $path_poster = 'theater/' . $data['onShow']['movie']['code'] . '-' . str_slug($data['onShow']['movie']['title']) . '.jpg';
-                if (! Storage::disk('public')->exists($path_poster) && ! empty($data['onShow']['movie']['poster']['href'])) {
+                if (! Storage::exists($path_poster) && ! empty($data['onShow']['movie']['poster']['href'])) {
                     $this->output->writeln('Téléchargement de l\'affiche pour ' . $data['onShow']['movie']['title']);
-                    Storage::disk('public')->put($path_poster, file_get_contents($data['onShow']['movie']['poster']['href']));
+                    Storage::put($path_poster, file_get_contents($data['onShow']['movie']['poster']['href']));
                 }
                 $this->_resizeImage($path_poster);
                 $genres = [];
@@ -178,14 +178,14 @@ class TheaterCommand extends Command
         ];
 
         foreach ($formats as $name => $size) {
-            if (! Storage::disk('public')->exists(str_replace('theater', 'theater/' . $name, $path))
-                && Storage::disk('public')->exists($path)) {
+            if (! Storage::exists(str_replace('theater', 'theater/' . $name, $path))
+                && Storage::exists($path)) {
                 try {
                     $this->output->writeln('Resize ' . $name . ' pour ' . $path);
                     $thumb = new Imagick();
-                    $thumb->readImage(Storage::disk('public')->path($path));
+                    $thumb->readImage(Storage::path($path));
                     $thumb->resizeImage($size, 0, Imagick::FILTER_LANCZOS, 1);
-                    Storage::disk('public')->put(str_replace('theater', 'theater/' . $name, $path), $thumb->getImageBlob());
+                    Storage::put(str_replace('theater', 'theater/' . $name, $path), $thumb->getImageBlob());
                     $thumb->clear();
                     $thumb->destroy();
                 } catch (\ImagickException $e) {
