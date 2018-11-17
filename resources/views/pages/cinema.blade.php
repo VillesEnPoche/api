@@ -19,7 +19,7 @@
                     <span>({{ Carbon\Carbon::createFromTimeString($movie->date)->shortRelativeDiffForHumans(2) }}
                         )</span></div>
 
-                <a href="{{ route('movie', ['id' => $movie->id, 'slug' => str_slug($movie->title)]) }}" class="m-auto d-md-none d-sm-block"><img class="img-fluid" src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url(str_replace('theater', 'theater/small', $movie->path_poster)) }}"/></a>
+                <a href="{{ route('movie', ['id' => $movie->id, 'slug' => str_slug($movie->title)]) }}" class="m-auto d-md-none d-sm-block"><img class="img-fluid" src="{{ \Illuminate\Support\Facades\Storage::url(str_replace('theater', 'theater/small', $movie->path_poster)) }}"/></a>
 
                 @if(!empty($movie->synopsis))
                     <div class="synopsis">
@@ -86,7 +86,7 @@
             </div>
             <div class="col-md-4 d-sm-none d-none d-md-block text-center">
                 <a href="{{ route('movie', ['id' => $movie->id, 'slug' => str_slug($movie->title)]) }}"><img class="img-fluid"
-                       src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url(str_replace('theater', 'theater/small', $movie->path_poster)) }}"/></a>
+                       src="{{ \Illuminate\Support\Facades\Storage::url(str_replace('theater', 'theater/small', $movie->path_poster)) }}"/></a>
             </div>
         </div>
     @endforeach

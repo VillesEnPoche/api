@@ -69,7 +69,7 @@
             @endif
             <div class="text-center p-4">
                 <img class="img-fluid"
-                     src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url(str_replace('theater', 'theater/medium', $movie->path_poster)) }}"/>
+                     src="{{ \Illuminate\Support\Facades\Storage::url(str_replace('theater', 'theater/medium', $movie->path_poster)) }}"/>
             </div>
         </div>
     </div>
