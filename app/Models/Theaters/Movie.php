@@ -28,4 +28,17 @@ class Movie extends Model
     {
         return Time::where('movie_id', '=', $this->id)->where('date', '>', Carbon::now())->orderBy('date', 'asc')->first();
     }
+
+    /**
+     * Récupére les séances du jour.
+     *
+     * @return mixed
+     */
+    public function today()
+    {
+        return Time::where('movie_id', '=', $this->id)
+            ->whereBetween('date', [Carbon::now()->format('Y-m-d H:i:s'), Carbon::now()->format('Y-m-d ') . '23:59:59'])
+            ->orderBy('date', 'asc')
+            ->get();
+    }
 }

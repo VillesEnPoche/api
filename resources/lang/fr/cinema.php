@@ -16,5 +16,6 @@ return [
         'trailer' => 'Bande annonce',
         'rating' => 'Note : :rating / 5',
         'times' => 'Séances',
+        'next_sessions' => 'Prochaines séances aujourd\'hui :',
     ],
 ];

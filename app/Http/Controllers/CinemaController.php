@@ -27,7 +27,7 @@ class CinemaController extends Controller implements Silex
         $movie = Movie::find($request->route('id'));
 
         $times = Time::where('movie_id', '=', $request->route('id'))
-            ->whereDate('date', '>=', Carbon::now())
+            ->where('date', '>=', Carbon::now())
             ->orderBy('date', 'asc')
             ->get();
 
