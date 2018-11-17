@@ -12,7 +12,7 @@ use Imagick;
 
 class TheaterCommand extends Command
 {
-    const WAIT_TIME = 60;
+    const WAIT_TIME = 20;
 
     const ALLOCINE_API_URL = 'https://api.allocine.fr/rest/v3/';
     /**

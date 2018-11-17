@@ -19,4 +19,19 @@
       font-weight: normal;
     }
   }
+  .trailer {
+    video {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  .session {
+    .date {
+      text-transform: capitalize;
+      font-weight: bold;
+    }
+    .time:hover {
+      background: $gray-300;
+    }
+  }
 }

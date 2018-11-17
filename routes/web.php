@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@show')->name('home');
 Route::get('/carburants.html', 'GazController@show')->name('gazs');
 Route::get('/silex.html', 'SilexController@show')->name('silex');
 Route::get('/cinema.html', 'CinemaController@show')->name('cinema');
+Route::get('/cinema/{slug}-{id}.html', 'CinemaController@movie')->name('movie')->where(['id' => '[0-9]+', 'slug' => '[0-9a-z\-]+']);
 
 Route::get('images/pollutants/gauges', 'PollutantController@gauges')->name('pollutants_gauges');
 

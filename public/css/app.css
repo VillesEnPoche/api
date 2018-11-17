@@ -10645,6 +10645,12 @@ body #logo {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#05b8c7', endColorstr='#109da7', GradientType=0);
 }
 
+.blue .title a,
+.blue .head a {
+  color: #fff;
+  text-decoration: none;
+}
+
 .blue .block .name {
   color: #05b8c7;
   padding-bottom: 10px;
@@ -10766,5 +10772,19 @@ body #logo {
 .movie .release span,
 .movie .synopsis span {
   font-weight: normal;
+}
+
+.movie .trailer video {
+  width: 100%;
+  max-width: 100%;
+}
+
+.movie .session .date {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.movie .session .time:hover {
+  background: #dee2e6;
 }
 
