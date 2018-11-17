@@ -21,3 +21,5 @@ Route::get('/cinema/{slug}-{id}.html', 'CinemaController@movie')->name('movie')-
 Route::get('images/pollutants/gauges', 'PollutantController@gauges')->name('pollutants_gauges');
 
 Route::get('trains/{name}-{numero}.html', 'HomeController@show')->name('details.train');
+
+Route::get('robots.txt', 'RobotsController@get')->name('robots.txt');
