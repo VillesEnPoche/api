@@ -13,7 +13,10 @@ class HomeController extends Controller
 
     public function show(Request $request)
     {
+        $city = trans('preposition.' . substr(strtolower(env('APP_CITY')), 0, 1)) . env('APP_CITY');
+
         return view('pages.home', [
+            'city' => $city,
             'last_match' => $this->_lastMatch(),
             'next_match' => $this->_nextMatch(),
             'last_match_rugby' => $this->_lastMatchRugby(),

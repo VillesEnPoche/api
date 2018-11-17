@@ -15,7 +15,7 @@ class CinemaController extends Controller implements Silex
         $movies = Movie::select(['theaters_movies.*', 'theaters_movies_times.date'])
             ->join('theaters_movies_times', 'theaters_movies_times.movie_id', '=', 'theaters_movies.id')
             ->where('theaters_movies_times.date', '>=', Carbon::now())
-            ->groupBy('theaters_movies_times.movie_id', 'theaters_movies.id', 'theaters_movies_times.date')
+            ->groupBy('theaters_movies_times.movie_id')
             ->orderBy('theaters_movies_times.date', 'asc')
             ->get();
 

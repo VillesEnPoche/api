@@ -15,7 +15,7 @@ return [
         'plus' => 'Plus d\'informations',
     ],
     'trains' => [
-        'title' => 'À la gare d\'Auxerre',
+        'title' => 'À la gare :city',
         'departures' => 'Prochains trains au départ',
         'arrivals' => 'Prochains trains à l\'arrivée',
         'hour' => 'Heure',

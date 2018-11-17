@@ -3,7 +3,7 @@
         <div class="row orange justify-content-between">
             <div class="col-12">
                 <div class="title">
-                    <div>{{ __('home.trains.title') }}</div>
+                    <div>{{ __('home.trains.title', ['city' => $city]) }}</div>
                 </div>
             </div>
             @foreach(['departures', 'arrivals'] as $type)
