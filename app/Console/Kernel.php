@@ -31,6 +31,7 @@ class Kernel extends ConsoleKernel
                 $this->call('images:pollutant');
                 $this->call('socials:pollutant');
             });
+        $schedule->command('import:theater')->dailyAt('7:00');
         $schedule->command('import:gas')->runInBackground()->hourly();
         $schedule->command('import:ter')->runInBackground()->everyFiveMinutes();
         $schedule->command('import:football:season')->runInBackground()->daily();
