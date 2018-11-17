@@ -6,6 +6,15 @@
                     <div>{{ __('home.trains.title', ['city' => $city]) }}</div>
                 </div>
             </div>
+            @if(count($trains_alerts))
+                <div class="col-12">
+                    @foreach($trains_alerts as $trains_alert)
+                        <div class="alert alert-warning">
+                            {{ $trains_alert->content }}
+                        </div>
+                    @endforeach
+                </div>
+            @endif
             @foreach(['departures', 'arrivals'] as $type)
                 <div class="col-6">
                     <div class="col-12">

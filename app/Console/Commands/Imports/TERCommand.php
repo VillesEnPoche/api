@@ -3,7 +3,9 @@
 namespace App\Console\Commands\Imports;
 
 use App\Models\Ter;
+use App\Models\Ters\Alert;
 use App\Models\Ters\Detail;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\ServerException;
@@ -53,7 +55,7 @@ class TERCommand extends Command
             'timeout' => 5.0,
         ]);
 
-        $this->_getData();
+        $this->_getData()->_getAlerts();
     }
 
     /**
@@ -75,6 +77,30 @@ class TERCommand extends Command
 
             foreach ($json[$data] as $train) {
                 $this->_getDetails($train);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    private function _getAlerts()
+    {
+        $this->output->writeln('Alerts TER');
+        $json = \GuzzleHttp\json_decode($this->_api->get('station?uic=' . env('TER_ID'))->getBody()->getContents(), true);
+        if (count($json['messages'])) {
+            foreach ($json['messages'] as $message) {
+                if (strpos($message['text'], 'VIGIPIRATE') === false) {
+                    Alert::updateOrCreate([
+                    'date' => Carbon::createFromTimeString($message['dateDebut'])->format('Y-m-d'),
+                    'content' => $message['text'],
+                    ], [
+                    'type' => $message['type'],
+                    'obj' => $message['obj'],
+                    ]);
+                }
             }
         }
 

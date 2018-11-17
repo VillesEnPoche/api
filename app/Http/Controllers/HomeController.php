@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ter;
+use App\Models\Ters\Alert;
 use App\Traits\Football;
 use App\Traits\Rugby;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class HomeController extends Controller
                 'departures' => Ter::departures(),
                 'arrivals' => Ter::arrivals(),
             ],
+            'trains_alerts' => Alert::today(),
         ]);
     }
 }
